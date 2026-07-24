@@ -83,51 +83,55 @@ export function HeroSequence() {
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-center items-center overflow-hidden bg-kailash-night text-kailash-snow">
       {/* ─── 4-LAYER PARALLAX STACK (Layer 0 to Layer 3) ─── */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 w-full min-w-full h-full overflow-hidden pointer-events-none">
         {/* Layer 0 (Furthest Background) */}
         <div
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+          className={`absolute -inset-8 bg-cover bg-center w-full min-w-full h-full transition-opacity duration-1000 ${
             isRevealed ? 'opacity-90' : 'opacity-20'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 0.png')`,
-            transform: `translate3d(${mousePos.x * 5}px, ${scrollOffsetY * 0.1 + mousePos.y * 5}px, 0) scale(1.05)`,
+            backgroundSize: '100% 100%',
+            transform: `translate3d(${mousePos.x * 6}px, ${scrollOffsetY * 0.1 + mousePos.y * 6}px, 0) scale(1.08)`,
             transition: 'transform 0.1s ease-out, opacity 1s ease',
           }}
         />
 
         {/* Layer 1 (Mid-Back Mountains / Clouds) */}
         <div
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+          className={`absolute -inset-8 bg-cover bg-center w-full min-w-full h-full transition-opacity duration-1000 ${
             isRevealed ? 'opacity-90' : 'opacity-15'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 1.png')`,
-            transform: `translate3d(${mousePos.x * 12}px, ${scrollOffsetY * 0.25 + mousePos.y * 10}px, 0) scale(1.08)`,
+            backgroundSize: '100% 100%',
+            transform: `translate3d(${mousePos.x * 14}px, ${scrollOffsetY * 0.25 + mousePos.y * 12}px, 0) scale(1.1)`,
             transition: 'transform 0.1s ease-out, opacity 1s ease',
           }}
         />
 
         {/* Layer 2 (Mid-Front Ridge / Hills) */}
         <div
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+          className={`absolute -inset-8 bg-cover bg-center w-full min-w-full h-full transition-opacity duration-1000 ${
             isRevealed ? 'opacity-95' : 'opacity-10'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 2.png')`,
-            transform: `translate3d(${mousePos.x * 20}px, ${scrollOffsetY * 0.4 + mousePos.y * 18}px, 0) scale(1.1)`,
+            backgroundSize: '100% 100%',
+            transform: `translate3d(${mousePos.x * 22}px, ${scrollOffsetY * 0.4 + mousePos.y * 20}px, 0) scale(1.12)`,
             transition: 'transform 0.1s ease-out, opacity 1s ease',
           }}
         />
 
         {/* Layer 3 (Foreground Elements) */}
         <div
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+          className={`absolute -inset-8 bg-cover bg-center w-full min-w-full h-full transition-opacity duration-1000 ${
             isRevealed ? 'opacity-100' : 'opacity-5'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 3.png')`,
-            transform: `translate3d(${mousePos.x * 32}px, ${scrollOffsetY * 0.55 + mousePos.y * 28}px, 0) scale(1.12)`,
+            backgroundSize: '100% 100%',
+            transform: `translate3d(${mousePos.x * 35}px, ${scrollOffsetY * 0.55 + mousePos.y * 30}px, 0) scale(1.15)`,
             transition: 'transform 0.1s ease-out, opacity 1s ease',
           }}
         />
