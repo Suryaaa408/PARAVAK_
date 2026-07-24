@@ -1,26 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Colors ─── strict palette from brand poster ─── */
+  /* ─── Kailash Derived Minimalist Palette ─── */
   --color-bone: #EDE7DF;
-  --color-bone-light: #F5F1EC;
+  --color-bone-light: #F6F3EE;
   --color-ochre: #C6791E;
   --color-ochre-dark: #A8651A;
   --color-ochre-light: #D4943F;
-  --color-charcoal: #22221F;
-  --color-ink: #2C2C2A;
+  --color-charcoal: #1F2226;
+  --color-ink: #2A2D32;
+  
+  --color-kailash-snow: #F8FAF7;
+  --color-kailash-slate: #2B343D;
+  --color-kailash-mist: #8C96A0;
+  --color-kailash-blue: #3E5466;
+  --color-kailash-earth: #8C6243;
+  --color-kailash-night: #0B1017;
+
   --color-mist-1: #D5CEC5;
   --color-mist-2: #A89F94;
   --color-mist-3: #8A8178;
 
-  /* ─── Typography ─── */
-  --font-serif: var(--font-source-serif), "Georgia", "Times New Roman", serif;
-  --font-sans: var(--font-source-sans), "Helvetica Neue", "Arial", sans-serif;
+  /* ─── Typography Fonts ─── */
+  --font-newsreader: var(--font-newsreader), "Georgia", serif;
+  --font-ibm-plex: var(--font-ibm-plex-sans), sans-serif;
+  --font-hindi-body: var(--font-noto-serif-devanagari), serif;
+  --font-hindi-heading: var(--font-noto-sans-devanagari), sans-serif;
+  --font-sanskrit: var(--font-tiro-sanskrit), serif;
 
-  /* ─── Spacing ─── editorial scale ─── */
+  --font-body: var(--font-newsreader);
+  --font-serif: var(--font-newsreader);
+  --font-sans: var(--font-ibm-plex);
+
+  /* ─── Spacing ─── */
   --spacing-prose: 2rem;
 
-  /* ─── Transitions ─── contemplative, not energetic ─── */
+  /* ─── Transitions ─── */
   --transition-base: 300ms ease;
   --transition-slow: 400ms ease;
 
@@ -53,7 +68,8 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-newsreader);
+  font-size: 20px;
   background-color: var(--color-bone);
   color: var(--color-charcoal);
   -webkit-font-smoothing: antialiased;
@@ -61,19 +77,76 @@ body {
   line-height: 1.7;
 }
 
-/* ─── Typography scale ─── */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  line-height: 1.2;
+/* ─── Type scale per client spec ─── */
+.text-hero-display {
+  font-family: var(--font-newsreader);
+  font-size: clamp(2.5rem, 6vw, 72px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h1, .text-h1 {
+  font-family: var(--font-ibm-plex);
+  font-size: clamp(2.25rem, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.25;
   color: var(--color-charcoal);
   letter-spacing: -0.01em;
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); }
-h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
-h4 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
+h2, .text-h2 {
+  font-family: var(--font-ibm-plex);
+  font-size: clamp(1.75rem, 3vw, 34px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-charcoal);
+}
+
+h3, .text-h3 {
+  font-family: var(--font-ibm-plex);
+  font-size: clamp(1.25rem, 2vw, 24px);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.text-body {
+  font-family: var(--font-newsreader);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.text-pullquote {
+  font-family: var(--font-newsreader);
+  font-size: clamp(1.25rem, 2.5vw, 28px);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.text-sanskrit {
+  font-family: var(--font-tiro-sanskrit);
+}
+
+.text-hindi-body {
+  font-family: var(--font-noto-serif-devanagari);
+}
+
+.text-hindi-heading {
+  font-family: var(--font-noto-sans-devanagari);
+}
+
+.text-bibliography {
+  font-family: var(--font-ibm-plex);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.text-footnote {
+  font-family: var(--font-newsreader);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
 
 /* ─── Prose styles for article body ─── */
 .prose {

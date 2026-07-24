@@ -33,28 +33,19 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       </div>
       
       <div className="flex-1 overflow-y-auto px-8 pb-8">
-        <nav className="flex flex-col gap-6 font-serif text-3xl text-charcoal">
+        <nav className="flex flex-col gap-4 font-serif text-2xl text-charcoal">
           <Link href="/" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Home</Link>
-          <Link href="/essays" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Essays</Link>
-          <Link href="/reflections" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Reflections</Link>
-          
-          <div className="flex flex-col gap-4 border-l border-mist-1 pl-4 my-2">
-            <span className="font-sans text-sm uppercase tracking-wider text-mist-3">Categories</span>
-            <Link href="/category/philosophy" onClick={onClose} className="hover:text-ochre transition-colors duration-300 text-2xl">Philosophy</Link>
-            <Link href="/category/religion" onClick={onClose} className="hover:text-ochre transition-colors duration-300 text-2xl">Religion</Link>
-            <Link href="/category/culture" onClick={onClose} className="hover:text-ochre transition-colors duration-300 text-2xl">Culture</Link>
-            <Link href="/category/language" onClick={onClose} className="hover:text-ochre transition-colors duration-300 text-2xl">Language</Link>
-            <Link href="/category/history" onClick={onClose} className="hover:text-ochre transition-colors duration-300 text-2xl">History</Link>
-          </div>
-          
-          <div className="flex flex-col gap-4 border-l border-mist-1 pl-4 my-2">
-            <span className="font-sans text-sm uppercase tracking-wider text-mist-3">Watch/Listen</span>
-            <Link href="/watch" onClick={onClose} className="hover:text-ochre transition-colors duration-300 text-2xl">Watch</Link>
-            <Link href="/listen" onClick={onClose} className="hover:text-ochre transition-colors duration-300 text-2xl">Listen</Link>
-          </div>
-          
-          <Link href="/people" onClick={onClose} className="hover:text-ochre transition-colors duration-300">People</Link>
-          <Link href="/about" onClick={onClose} className="hover:text-ochre transition-colors duration-300">About</Link>
+          <Link href="/vaktavya" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Vaktavya</Link>
+          <Link href="/about" onClick={onClose} className="hover:text-ochre transition-colors duration-300">About Us</Link>
+          <Link href="/contact" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Contact</Link>
+          <Link href="/newsletter" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Newsletter</Link>
+          <Link href="/articles" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Articles</Link>
+          <Link href="/book-review" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Book Review</Link>
+          <Link href="/podcasts-and-lectures" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Podcasts & Lectures</Link>
+          <Link href="/shastra" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Shastra</Link>
+          <Link href="/kavya" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Kavya</Link>
+          <Link href="/gallery" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Gallery</Link>
+          <Link href="/announcements" onClick={onClose} className="hover:text-ochre transition-colors duration-300">Activity & Announcements</Link>
         </nav>
       </div>
     </div>

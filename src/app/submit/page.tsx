@@ -1,75 +1,180 @@
-import { Hero } from '@/components/Hero';
-import { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Submission Guidelines | Parāvāk',
-  description: 'How to submit your work to Parāvāk.',
-};
+import { useState } from 'react';
 
 export default function SubmitPage() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [title, setTitle] = useState('');
+  const [section, setSection] = useState('articles');
+  const [pastedText, setPastedText] = useState('');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [responseMsg, setResponseMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setResponseMsg(null);
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('title', title);
+    formData.append('section', section);
+    formData.append('pastedText', pastedText);
+    if (selectedFile) {
+      formData.append('file', selectedFile);
+    }
+
+    try {
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setResponseMsg({ type: 'success', text: data.message });
+        setName('');
+        setEmail('');
+        setTitle('');
+        setPastedText('');
+        setSelectedFile(null);
+      } else {
+        setResponseMsg({ type: 'error', text: data.error || 'Failed to submit.' });
+      }
+    } catch (err) {
+      setResponseMsg({ type: 'error', text: 'Network connection error during submission.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-bone">
-      <Hero 
-        variant="inner" 
-        title="Submission Guidelines" 
-      />
-      
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="prose prose-lg prose-stone max-w-none">
-          <p className="lead text-xl text-charcoal/80 font-serif mb-12">
-            Parāvāk welcomes submissions from scholars, writers, and practitioners whose work aligns with our focus on classical Indian thought, comparative philosophy, and the arts. 
+    <div className="relative min-h-screen bg-kailash-night text-kailash-snow py-20 px-6 overflow-hidden font-sans">
+      {/* Night Sky & Crescent Moon Visual Background */}
+      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(white_1px,transparent_1px)] [background-size:24px_24px]" />
+      <div className="absolute top-12 left-12 pointer-events-none opacity-25 text-ochre-light">
+        <svg viewBox="0 0 100 100" className="w-32 h-32" fill="currentColor">
+          <path d="M50 10 A40 40 0 1 0 90 50 A32 32 0 1 1 50 10 Z" />
+        </svg>
+      </div>
+
+      <div className="relative z-10 max-w-3xl mx-auto space-y-10">
+        <div className="text-center space-y-4">
+          <span className="font-sans text-xs uppercase tracking-[0.3em] text-ochre">Manuscript Guidelines & Submissions</span>
+          <h1 className="font-serif text-5xl font-bold text-bone">Submit Your Work</h1>
+          <p className="font-serif text-base text-mist-2 max-w-xl mx-auto">
+            Parāvāk accepts original essays, book reviews, verse translations, and research papers focused on philosophy, religion, culture, and language.
           </p>
-          
-          <h2 className="font-serif text-3xl text-charcoal border-b border-mist-1 pb-4 mb-6">What We Publish</h2>
-          <ul className="font-sans text-charcoal/80 space-y-4 mb-12">
-            <li><strong>Essays & Articles:</strong> Original explorations of philosophical themes (2,000 – 4,000 words).</li>
-            <li><strong>Reviews:</strong> Critical assessments of recent books in our areas of interest (800 – 1,500 words).</li>
-            <li><strong>Translations:</strong> High-quality English translations of primary source texts, accompanied by an introduction.</li>
-            <li><strong>Poetry & Fiction:</strong> Select pieces that reflect deeply on metaphysical or spiritual themes.</li>
-          </ul>
-          
-          <h2 className="font-serif text-3xl text-charcoal border-b border-mist-1 pb-4 mb-6">The Process</h2>
-          <div className="space-y-8 font-sans mb-12">
-            <div className="flex gap-6">
-              <div className="flex-shrink-0 w-12 h-12 bg-charcoal text-bone rounded-full flex items-center justify-center font-bold text-xl">1</div>
-              <div>
-                <h3 className="text-xl font-bold text-charcoal mb-2">Initial Pitch</h3>
-                <p className="text-charcoal/70">Send a 300-word summary of your proposed piece, along with a brief author bio, to <strong>submissions@paravak.com</strong>.</p>
-              </div>
-            </div>
-            <div className="flex gap-6">
-              <div className="flex-shrink-0 w-12 h-12 bg-charcoal text-bone rounded-full flex items-center justify-center font-bold text-xl">2</div>
-              <div>
-                <h3 className="text-xl font-bold text-charcoal mb-2">Editorial Review</h3>
-                <p className="text-charcoal/70">Our editorial board reviews pitches monthly. We aim to respond within 4-6 weeks.</p>
-              </div>
-            </div>
-            <div className="flex gap-6">
-              <div className="flex-shrink-0 w-12 h-12 bg-charcoal text-bone rounded-full flex items-center justify-center font-bold text-xl">3</div>
-              <div>
-                <h3 className="text-xl font-bold text-charcoal mb-2">Drafting & Revisions</h3>
-                <p className="text-charcoal/70">If accepted, you will work closely with an assigned editor to refine the piece. We use the Chicago Manual of Style (Notes and Bibliography).</p>
-              </div>
-            </div>
-            <div className="flex gap-6">
-              <div className="flex-shrink-0 w-12 h-12 bg-charcoal text-bone rounded-full flex items-center justify-center font-bold text-xl">4</div>
-              <div>
-                <h3 className="text-xl font-bold text-charcoal mb-2">Publication</h3>
-                <p className="text-charcoal/70">Once finalized, your piece will be scheduled for publication across our digital channels.</p>
-              </div>
-            </div>
+        </div>
+
+        {responseMsg && (
+          <div
+            className={`p-6 rounded-lg border text-sm font-sans ${
+              responseMsg.type === 'success'
+                ? 'bg-emerald-950/70 border-emerald-500/50 text-emerald-200'
+                : 'bg-rose-950/70 border-rose-500/50 text-rose-200'
+            }`}
+          >
+            {responseMsg.text}
           </div>
-          
-          <div className="bg-mist-1/30 p-8 rounded-lg border border-mist-1">
-            <h3 className="font-serif text-2xl text-charcoal mb-4">Ready to pitch?</h3>
-            <p className="font-sans text-charcoal/70 mb-6">Ensure your submission follows our guidelines before reaching out.</p>
-            <a href="mailto:submissions@paravak.com" className="inline-block bg-ochre text-charcoal font-sans px-8 py-3 rounded-md font-medium hover:bg-charcoal hover:text-bone transition-colors">
-              Email Submissions
-            </a>
+        )}
+
+        <form onSubmit={handleSubmit} className="bg-kailash-slate/60 border border-mist-1/15 p-8 rounded-xl space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-xs uppercase tracking-widest text-mist-2 mb-2 font-semibold">Author Full Name *</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Dr. / Prof. / Full Name"
+                required
+                className="w-full bg-kailash-night border border-mist-1/20 px-4 py-3 rounded text-bone focus:outline-none focus:border-ochre"
+              />
+            </div>
+            <div>
+              <label className="block text-xs uppercase tracking-widest text-mist-2 mb-2 font-semibold">Email Address *</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="author@institution.edu"
+                required
+                className="w-full bg-kailash-night border border-mist-1/20 px-4 py-3 rounded text-bone focus:outline-none focus:border-ochre"
+              />
+            </div>
           </div>
 
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-xs uppercase tracking-widest text-mist-2 mb-2 font-semibold">Manuscript Title *</label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Title of your paper or essay"
+                required
+                className="w-full bg-kailash-night border border-mist-1/20 px-4 py-3 rounded text-bone focus:outline-none focus:border-ochre"
+              />
+            </div>
+            <div>
+              <label className="block text-xs uppercase tracking-widest text-mist-2 mb-2 font-semibold">Target Section</label>
+              <select
+                value={section}
+                onChange={(e) => setSection(e.target.value)}
+                className="w-full bg-kailash-night border border-mist-1/20 px-4 py-3 rounded text-bone focus:outline-none focus:border-ochre"
+              >
+                <option value="articles">Articles & Essays</option>
+                <option value="book-review">Book Review</option>
+                <option value="shastra">Shastra Analysis</option>
+                <option value="kavya">Kavya & Poetry</option>
+                <option value="reflection">Short Reflection</option>
+              </select>
+            </div>
+          </div>
+
+          {/* File Upload Field */}
+          <div>
+            <label className="block text-xs uppercase tracking-widest text-mist-2 mb-2 font-semibold">
+              Upload Manuscript (PDF, DOCX, TXT - Max 10MB)
+            </label>
+            <input
+              type="file"
+              accept=".pdf,.docx,.doc,.txt,.epub"
+              onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+              className="w-full bg-kailash-night border border-mist-1/20 px-4 py-3 rounded text-sm text-mist-2 file:mr-4 file:py-1.5 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-ochre file:text-bone hover:file:bg-ochre-dark"
+            />
+            {selectedFile && (
+              <p className="text-xs text-ochre-light mt-2">Selected: {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)</p>
+            )}
+          </div>
+
+          {/* Paste-Text Area */}
+          <div>
+            <label className="block text-xs uppercase tracking-widest text-mist-2 mb-2 font-semibold">
+              Or Paste Text Abstract / Draft Copy
+            </label>
+            <textarea
+              rows={6}
+              value={pastedText}
+              onChange={(e) => setPastedText(e.target.value)}
+              placeholder="Paste your full text or abstract here..."
+              className="w-full bg-kailash-night border border-mist-1/20 px-4 py-3 rounded text-bone font-newsreader focus:outline-none focus:border-ochre"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-ochre hover:bg-ochre-dark disabled:opacity-50 text-bone font-sans text-xs uppercase tracking-widest py-4 rounded font-bold transition-colors shadow-lg"
+          >
+            {isSubmitting ? 'Transmitting Submission...' : 'Transmit Submission to Parāvāk Editorial Board →'}
+          </button>
+        </form>
       </div>
-    </main>
+    </div>
   );
 }

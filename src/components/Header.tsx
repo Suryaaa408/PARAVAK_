@@ -14,33 +14,19 @@ export function Header() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Wordmark />
         
-        <nav className="hidden md:flex items-center gap-6 font-sans text-sm uppercase tracking-wider text-mist-3">
-          <Link href="/" className="hover:text-ochre transition-colors duration-300">Home</Link>
-          <Link href="/essays" className="hover:text-ochre transition-colors duration-300">Essays</Link>
-          <Link href="/reflections" className="hover:text-ochre transition-colors duration-300">Reflections</Link>
-          <div className="relative group">
-            <span className="cursor-pointer hover:text-ochre transition-colors duration-300">Categories</span>
-            <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <div className="bg-bone border border-mist-1 p-4 flex flex-col gap-2 w-48 shadow-lg">
-                <Link href="/category/philosophy" className="hover:text-ochre">Philosophy</Link>
-                <Link href="/category/religion" className="hover:text-ochre">Religion</Link>
-                <Link href="/category/culture" className="hover:text-ochre">Culture</Link>
-                <Link href="/category/language" className="hover:text-ochre">Language</Link>
-                <Link href="/category/history" className="hover:text-ochre">History</Link>
-              </div>
-            </div>
-          </div>
-          <div className="relative group">
-            <span className="cursor-pointer hover:text-ochre transition-colors duration-300">Watch/Listen</span>
-            <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <div className="bg-bone border border-mist-1 p-4 flex flex-col gap-2 w-32 shadow-lg">
-                <Link href="/watch" className="hover:text-ochre">Watch</Link>
-                <Link href="/listen" className="hover:text-ochre">Listen</Link>
-              </div>
-            </div>
-          </div>
-          <Link href="/people" className="hover:text-ochre transition-colors duration-300">People</Link>
-          <Link href="/about" className="hover:text-ochre transition-colors duration-300">About</Link>
+        <nav className="hidden lg:flex items-center gap-4 font-sans text-xs uppercase tracking-wider text-charcoal/80 overflow-x-auto">
+          <Link href="/" className="hover:text-ochre transition-colors duration-200">Home</Link>
+          <Link href="/vaktavya" className="hover:text-ochre transition-colors duration-200">Vaktavya</Link>
+          <Link href="/about" className="hover:text-ochre transition-colors duration-200 whitespace-nowrap">About Us</Link>
+          <Link href="/contact" className="hover:text-ochre transition-colors duration-200">Contact</Link>
+          <Link href="/newsletter" className="hover:text-ochre transition-colors duration-200">Newsletter</Link>
+          <Link href="/articles" className="hover:text-ochre transition-colors duration-200">Articles</Link>
+          <Link href="/book-review" className="hover:text-ochre transition-colors duration-200 whitespace-nowrap">Book Review</Link>
+          <Link href="/podcasts-and-lectures" className="hover:text-ochre transition-colors duration-200 whitespace-nowrap">Podcasts & Lectures</Link>
+          <Link href="/shastra" className="hover:text-ochre transition-colors duration-200">Shastra</Link>
+          <Link href="/kavya" className="hover:text-ochre transition-colors duration-200">Kavya</Link>
+          <Link href="/gallery" className="hover:text-ochre transition-colors duration-200">Gallery</Link>
+          <Link href="/announcements" className="hover:text-ochre transition-colors duration-200">Activity</Link>
         </nav>
 
         <div className="flex items-center gap-4">
