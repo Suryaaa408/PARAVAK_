@@ -7,7 +7,6 @@ export function HeroSequence() {
   const [phase, setPhase] = useState<'logo' | 'typewriter' | 'mist' | 'complete'>('logo');
   const [typedText, setTypedText] = useState('');
   const [scrollOffsetY, setScrollOffsetY] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const fullText = 'Parāvāk';
 
   useEffect(() => {
@@ -49,25 +48,15 @@ export function HeroSequence() {
     }
   }, [phase]);
 
-  // Scroll and Mouse Parallax Event Listeners
+  // Scroll Parallax Event Listener (Purely Scroll Driven)
   useEffect(() => {
     const handleScroll = () => {
       setScrollOffsetY(window.scrollY);
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
-      const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
-      setMousePos({ x, y });
-    };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
@@ -82,58 +71,58 @@ export function HeroSequence() {
 
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-center items-center overflow-hidden bg-white text-charcoal">
-      {/* ─── 4-LAYER PARALLAX STACK (Preserved Aspect Ratio on Pure White Background) ─── */}
+      {/* ─── 4-LAYER PARALLAX STACK (100% Opacity, Purely Scroll-Triggered) ─── */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
         {/* Layer 0 (Furthest Background) */}
         <div
           className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-            isRevealed ? 'opacity-90' : 'opacity-20'
+            isRevealed ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 0.png')`,
-            transform: `translate3d(${mousePos.x * 6}px, ${scrollOffsetY * 0.1 + mousePos.y * 6}px, 0) scale(1.05)`,
-            transition: 'transform 0.1s ease-out, opacity 1s ease',
+            transform: `translate3d(0, ${scrollOffsetY * 0.1}px, 0)`,
+            willChange: 'transform',
           }}
         />
 
         {/* Layer 1 (Mid-Back Mountains / Clouds) */}
         <div
           className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-            isRevealed ? 'opacity-90' : 'opacity-15'
+            isRevealed ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 1.png')`,
-            transform: `translate3d(${mousePos.x * 12}px, ${scrollOffsetY * 0.25 + mousePos.y * 10}px, 0) scale(1.06)`,
-            transition: 'transform 0.1s ease-out, opacity 1s ease',
+            transform: `translate3d(0, ${scrollOffsetY * 0.25}px, 0)`,
+            willChange: 'transform',
           }}
         />
 
         {/* Layer 2 (Mid-Front Ridge / Hills) */}
         <div
           className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-            isRevealed ? 'opacity-95' : 'opacity-10'
+            isRevealed ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 2.png')`,
-            transform: `translate3d(${mousePos.x * 18}px, ${scrollOffsetY * 0.4 + mousePos.y * 16}px, 0) scale(1.08)`,
-            transition: 'transform 0.1s ease-out, opacity 1s ease',
+            transform: `translate3d(0, ${scrollOffsetY * 0.4}px, 0)`,
+            willChange: 'transform',
           }}
         />
 
         {/* Layer 3 (Foreground Elements) */}
         <div
           className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-            isRevealed ? 'opacity-100' : 'opacity-5'
+            isRevealed ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 3.png')`,
-            transform: `translate3d(${mousePos.x * 26}px, ${scrollOffsetY * 0.55 + mousePos.y * 22}px, 0) scale(1.1)`,
-            transition: 'transform 0.1s ease-out, opacity 1s ease',
+            transform: `translate3d(0, ${scrollOffsetY * 0.6}px, 0)`,
+            willChange: 'transform',
           }}
         />
 
-        {/* Subtle Light Gradient Overlay for Pristine Readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-white/50" />
+        {/* Light Overlay Gradient for Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-white/40" />
       </div>
 
       {/* Skip Button */}
