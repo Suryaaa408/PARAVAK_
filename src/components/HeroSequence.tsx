@@ -81,70 +81,66 @@ export function HeroSequence() {
   const isRevealed = phase === 'mist' || phase === 'complete';
 
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-center items-center overflow-hidden bg-kailash-night text-kailash-snow">
-      {/* ─── 4-LAYER PARALLAX STACK (Layer 0 to Layer 3) ─── */}
-      <div className="absolute inset-0 w-full min-w-full h-full overflow-hidden pointer-events-none">
+    <section className="relative min-h-[92vh] flex flex-col justify-center items-center overflow-hidden bg-white text-charcoal">
+      {/* ─── 4-LAYER PARALLAX STACK (Preserved Aspect Ratio on Pure White Background) ─── */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
         {/* Layer 0 (Furthest Background) */}
         <div
-          className={`absolute -inset-8 bg-cover bg-center w-full min-w-full h-full transition-opacity duration-1000 ${
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
             isRevealed ? 'opacity-90' : 'opacity-20'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 0.png')`,
-            backgroundSize: '100% 100%',
-            transform: `translate3d(${mousePos.x * 6}px, ${scrollOffsetY * 0.1 + mousePos.y * 6}px, 0) scale(1.08)`,
+            transform: `translate3d(${mousePos.x * 6}px, ${scrollOffsetY * 0.1 + mousePos.y * 6}px, 0) scale(1.05)`,
             transition: 'transform 0.1s ease-out, opacity 1s ease',
           }}
         />
 
         {/* Layer 1 (Mid-Back Mountains / Clouds) */}
         <div
-          className={`absolute -inset-8 bg-cover bg-center w-full min-w-full h-full transition-opacity duration-1000 ${
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
             isRevealed ? 'opacity-90' : 'opacity-15'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 1.png')`,
-            backgroundSize: '100% 100%',
-            transform: `translate3d(${mousePos.x * 14}px, ${scrollOffsetY * 0.25 + mousePos.y * 12}px, 0) scale(1.1)`,
+            transform: `translate3d(${mousePos.x * 12}px, ${scrollOffsetY * 0.25 + mousePos.y * 10}px, 0) scale(1.06)`,
             transition: 'transform 0.1s ease-out, opacity 1s ease',
           }}
         />
 
         {/* Layer 2 (Mid-Front Ridge / Hills) */}
         <div
-          className={`absolute -inset-8 bg-cover bg-center w-full min-w-full h-full transition-opacity duration-1000 ${
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
             isRevealed ? 'opacity-95' : 'opacity-10'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 2.png')`,
-            backgroundSize: '100% 100%',
-            transform: `translate3d(${mousePos.x * 22}px, ${scrollOffsetY * 0.4 + mousePos.y * 20}px, 0) scale(1.12)`,
+            transform: `translate3d(${mousePos.x * 18}px, ${scrollOffsetY * 0.4 + mousePos.y * 16}px, 0) scale(1.08)`,
             transition: 'transform 0.1s ease-out, opacity 1s ease',
           }}
         />
 
         {/* Layer 3 (Foreground Elements) */}
         <div
-          className={`absolute -inset-8 bg-cover bg-center w-full min-w-full h-full transition-opacity duration-1000 ${
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
             isRevealed ? 'opacity-100' : 'opacity-5'
           }`}
           style={{
             backgroundImage: `url('/Paralax/Layer 3.png')`,
-            backgroundSize: '100% 100%',
-            transform: `translate3d(${mousePos.x * 35}px, ${scrollOffsetY * 0.55 + mousePos.y * 30}px, 0) scale(1.15)`,
+            transform: `translate3d(${mousePos.x * 26}px, ${scrollOffsetY * 0.55 + mousePos.y * 22}px, 0) scale(1.1)`,
             transition: 'transform 0.1s ease-out, opacity 1s ease',
           }}
         />
 
-        {/* Atmospheric Gradient Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-kailash-night via-transparent to-kailash-night/60" />
+        {/* Subtle Light Gradient Overlay for Pristine Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-white/50" />
       </div>
 
       {/* Skip Button */}
       {phase !== 'complete' && (
         <button
           onClick={handleSkip}
-          className="absolute top-6 right-6 z-30 font-sans text-xs uppercase tracking-widest text-mist-1 hover:text-ochre border border-mist-1/30 bg-kailash-slate/50 backdrop-blur px-3 py-1.5 rounded transition-all duration-300"
+          className="absolute top-6 right-6 z-30 font-sans text-xs uppercase tracking-widest text-charcoal hover:text-ochre border border-mist-2/40 bg-white/80 backdrop-blur px-3.5 py-1.5 rounded transition-all duration-300 shadow-sm"
         >
           Skip Intro →
         </button>
@@ -160,13 +156,13 @@ export function HeroSequence() {
               <circle cx="50" cy="50" r="30" />
               <path d="M50 20v60M20 50h60" />
             </svg>
-            <span className="font-sans text-xs uppercase tracking-widest text-mist-2">Entering Space of Vāda & Samvāda</span>
+            <span className="font-sans text-xs uppercase tracking-widest text-mist-3 font-semibold">Entering Space of Vāda & Samvāda</span>
           </div>
         )}
 
         {/* Phase 2: Typewriter */}
         {phase === 'typewriter' && (
-          <div className="font-serif text-5xl md:text-7xl font-bold tracking-tight text-bone">
+          <div className="font-serif text-5xl md:text-7xl font-bold tracking-tight text-charcoal">
             <span>{typedText}</span>
             <span className="animate-pulse text-ochre">|</span>
           </div>
@@ -176,22 +172,22 @@ export function HeroSequence() {
         {isRevealed && (
           <div className="animate-fade-in-up flex flex-col items-center gap-8">
             <div className="inline-block border-b border-ochre/50 pb-2">
-              <span className="font-sans text-xs uppercase tracking-[0.3em] text-ochre">Journal of Philosophy, Culture & Dialogue</span>
+              <span className="font-sans text-xs uppercase tracking-[0.3em] text-ochre font-bold">Journal of Philosophy, Culture & Dialogue</span>
             </div>
 
-            <h1 className="font-serif text-5xl md:text-7xl font-bold text-bone tracking-tight leading-tight drop-shadow-lg">
+            <h1 className="font-serif text-5xl md:text-7xl font-bold text-charcoal tracking-tight leading-tight">
               Parāvāk
             </h1>
 
             {/* Sanskrit Verse & Gloss */}
-            <div className="bg-kailash-slate/75 backdrop-blur-md border border-mist-1/20 p-6 md:p-8 rounded-xl max-w-3xl my-2 text-left shadow-2xl">
-              <p className="font-sanskrit text-2xl md:text-3xl text-ochre-light mb-3 text-center tracking-wide leading-relaxed">
+            <div className="bg-white/85 backdrop-blur-md border border-mist-1/60 p-6 md:p-8 rounded-xl max-w-3xl my-2 text-left shadow-xl">
+              <p className="font-sanskrit text-2xl md:text-3xl text-ochre-dark mb-3 text-center tracking-wide leading-relaxed font-semibold">
                 "सहृदयं सांमनस्यम् अविद्वेषं कृणोमि वः"
               </p>
-              <p className="font-sans text-xs uppercase tracking-widest text-mist-2 text-center mb-4">
+              <p className="font-sans text-xs uppercase tracking-widest text-mist-3 text-center mb-4 font-medium">
                 (Atharvaveda 3.30.1)
               </p>
-              <p className="font-serif italic text-lg md:text-xl text-bone/90 text-center leading-relaxed">
+              <p className="font-serif italic text-lg md:text-xl text-charcoal/90 text-center leading-relaxed">
                 "I create for you concord of heart, harmony of mind, and freedom from hostility — empowering a shared vision built on rigorous intellect (<span className="text-ochre font-semibold">vāda</span>) and deep empathetic dialogue (<span className="text-ochre font-semibold">samvāda</span>)."
               </p>
             </div>
@@ -199,13 +195,13 @@ export function HeroSequence() {
             <div className="flex flex-wrap gap-4 justify-center mt-2">
               <Link
                 href="/vaktavya"
-                className="bg-ochre hover:bg-ochre-dark text-bone font-sans text-xs uppercase tracking-widest font-semibold px-8 py-3.5 rounded transition-all duration-300 shadow-xl"
+                className="bg-ochre hover:bg-ochre-dark text-white font-sans text-xs uppercase tracking-widest font-semibold px-8 py-3.5 rounded transition-all duration-300 shadow-md"
               >
                 Read Vaktavya (Statement)
               </Link>
               <Link
                 href="/articles"
-                className="border border-mist-1/40 hover:border-ochre text-bone hover:text-ochre font-sans text-xs uppercase tracking-widest font-semibold px-8 py-3.5 rounded transition-all duration-300 bg-kailash-slate/40 backdrop-blur"
+                className="border border-charcoal/30 hover:border-ochre text-charcoal hover:text-ochre font-sans text-xs uppercase tracking-widest font-semibold px-8 py-3.5 rounded transition-all duration-300 bg-white/80 backdrop-blur shadow-sm"
               >
                 Explore Articles
               </Link>
