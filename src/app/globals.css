@@ -1,26 +1,223 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ─── Colors ─── strict palette from brand poster ─── */
+  --color-bone: #EDE7DF;
+  --color-bone-light: #F5F1EC;
+  --color-ochre: #C6791E;
+  --color-ochre-dark: #A8651A;
+  --color-ochre-light: #D4943F;
+  --color-charcoal: #22221F;
+  --color-ink: #2C2C2A;
+  --color-mist-1: #D5CEC5;
+  --color-mist-2: #A89F94;
+  --color-mist-3: #8A8178;
+
+  /* ─── Typography ─── */
+  --font-serif: var(--font-source-serif), "Georgia", "Times New Roman", serif;
+  --font-sans: var(--font-source-sans), "Helvetica Neue", "Arial", sans-serif;
+
+  /* ─── Spacing ─── editorial scale ─── */
+  --spacing-prose: 2rem;
+
+  /* ─── Transitions ─── contemplative, not energetic ─── */
+  --transition-base: 300ms ease;
+  --transition-slow: 400ms ease;
+
+  /* ─── Max widths ─── */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-prose: 680px;
+  --container-wide: 1400px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ─── Base styles ─── */
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-bone);
+  color: var(--color-charcoal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7;
+}
+
+/* ─── Typography scale ─── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-charcoal);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+h4 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
+
+/* ─── Prose styles for article body ─── */
+.prose {
+  max-width: var(--container-prose);
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--color-ink);
+}
+
+.prose p {
+  margin-bottom: 1.5em;
+}
+
+.prose p:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  font-size: 3.5em;
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+  color: var(--color-ochre);
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--color-ochre);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--color-mist-3);
+}
+
+/* ─── Links ─── */
+a {
+  color: var(--color-charcoal);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+a:hover {
+  color: var(--color-ochre);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background-color: var(--color-ochre);
+  color: var(--color-bone);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bone);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-mist-2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-mist-3);
+}
+
+/* ─── Utility classes ─── */
+.container-wide {
+  max-width: var(--container-wide);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.container-prose {
+  max-width: var(--container-prose);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.text-ochre { color: var(--color-ochre); }
+.text-mist { color: var(--color-mist-2); }
+.text-mist-dark { color: var(--color-mist-3); }
+.bg-bone-light { background-color: var(--color-bone-light); }
+
+/* ─── Animations ─── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-delay-1 { animation-delay: 100ms; }
+.animate-delay-2 { animation-delay: 200ms; }
+.animate-delay-3 { animation-delay: 300ms; }
+.animate-delay-4 { animation-delay: 400ms; }
+
+/* ─── Hairline dividers ─── */
+.divider-hairline {
+  border: none;
+  border-top: 1px solid var(--color-mist-1);
+}
+
+/* ─── Circle motif ─── */
+.circle-motif {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--color-bone-light) 0%,
+    var(--color-mist-1) 100%
+  );
+  opacity: 0.5;
+}
+
+.circle-motif-ochre {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-ochre);
+  opacity: 0.08;
 }
